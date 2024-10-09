@@ -43,7 +43,7 @@ if ($_SESSION['usertype'] == 'student') {
 		<div class="row gy-3">
 			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
-					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: rgb(126, 9, 9);">
+					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: rgb(195 115 0);">
 						<i class="fas fa-user-graduate"></i>
 					</div>
 					<div class="summary_details">
@@ -100,7 +100,7 @@ if ($_SESSION['usertype'] == 'student') {
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
-					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: #0f0850;">
+					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: rgb(139 17 17);">
 						<i class="fas fa-exclamation-circle"></i>
 					</div>
 					<div class="summary_details">

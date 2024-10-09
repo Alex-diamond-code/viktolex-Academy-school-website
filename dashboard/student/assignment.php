@@ -40,6 +40,7 @@ if ($_SESSION['usertype'] == 'admin') {
 				<form action="" method="POST" class="my-4">
 					<div class="mb-3">
 						<select class="form-control" name="class" id="class" required>
+							<option value="Select your class" hidden selected disabled>Select your class</option>
 							<option value="Reception">Reception</option>
 							<option value="Transition">Transition</option>
 							<option value="Nursery 1">Nursery 1</option>
@@ -53,6 +54,7 @@ if ($_SESSION['usertype'] == 'admin') {
 					</div>
 					<div class="mb-3">
 						<select class="form-control" name="subject" id="Subject" required>
+							<option value="Select the subject" hidden selected disabled>Select the subject</option>
 							<option value="Mathematics">Mathematics</option>
 							<option value="English">English</option>
 							<option value="Basic Science">Basic Science</option>
@@ -86,27 +88,31 @@ if ($_SESSION['usertype'] == 'admin') {
 
 				$query = "SELECT * FROM assignment WHERE class='$class' AND subject='$subject'";
 				$run_query = mysqli_query($con, $query);
-				$result = mysqli_fetch_assoc($run_query);
-			?>
-				<div class="report-box d-flex flex-column">
-					<input type="text" value="<?php echo $result['id'] ?>" hidden>
-					<h5 class="fw-bolder"><?php echo $result['subject'] ?></h5>
-					<p disabled><?php echo $result['question_1'] ?></p>
-					<p disabled><?php echo $result['question_2'] ?></p>
-					<p disabled><?php echo $result['question_3'] ?></p>
-					<p disabled><?php echo $result['question_4'] ?></p>
-					<p disabled><?php echo $result['question_5'] ?></p>
-				</div>
-			<?php
-			} else {
-				$_SESSION['message1'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>Hey,</strong> Assignment not found 
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                                <br>';
-				header('Location: ../student/assignment.php');
-			}?>
 
+
+				if ($result = mysqli_fetch_assoc($run_query)) {
+
+			?>
+					<div class="report-box d-flex flex-column">
+						<input type="text" value="<?php echo $result['id'] ?>" hidden>
+						<h5 class="fw-bolder"><?php echo $result['subject'] ?></h5>
+						<p disabled><?php echo $result['question_1'] ?></p>
+						<p disabled><?php echo $result['question_2'] ?></p>
+						<p disabled><?php echo $result['question_3'] ?></p>
+						<p disabled><?php echo $result['question_4'] ?></p>
+						<p disabled><?php echo $result['question_5'] ?></p>
+					</div>
+			<?php
+				} //else {
+				// 	$_SESSION['message1'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				// 					<strong>Hey,</strong> Assignment not found 
+				// 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				// 					</div>
+				// 					<br>';
+				// 	header('Location: ../student/assignment.php');
+				// }
+			}
+			?>
 		</div>
 		<br>
 	</div>

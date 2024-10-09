@@ -52,7 +52,7 @@
 	</div>
 	<style>
 		.offcanvas-body::-webkit-scrollbar{
-			width: 5px;
+			width: 7px;
 		}
 		.offcanvas-body::-webkit-scrollbar-thumb{
 			border-radius: 10px;

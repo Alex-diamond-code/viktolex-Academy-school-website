@@ -70,9 +70,9 @@ if ($_SESSION['usertype'] == 'admin') {
 
             </form>
         </div>
-        <div class="col-lg-6 col-md-6 col-12 d-flex align-items-center justify-content-center">
-            <div class="d-sm-none d-lg-block d-md-block d-none mx-4">
-                <img src="./assests/image/edit _student.png" class="img-fluid" alt="" width="80%">
+        <div class="col-lg-6 col-md-6 col-12 d-flex align-items-center justify-content-center px-5">
+            <div class="d-sm-none d-lg-block d-md-block d-none w-100 px-3">
+                <img src="./assests/image/profile.png" class="img-fluid" alt="" width="100%">
             </div>
         </div>
     </div>

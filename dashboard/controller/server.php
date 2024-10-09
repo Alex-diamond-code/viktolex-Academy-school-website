@@ -237,7 +237,7 @@ if (isset($_POST['delete_student'])) {
                                 </div>
                                 <br>';
         header('Location: ../admin/student_record.php');
-    }else{
+    } else {
         $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Failed to delete Student
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -245,7 +245,6 @@ if (isset($_POST['delete_student'])) {
                                 <br>';
         header('Location: ../admin/student_record.php');
     }
-
 }
 
 
@@ -264,7 +263,7 @@ if (isset($_POST['delete_teacher'])) {
                                 </div>
                                 <br>';
         header('Location: ../admin/Teacher_record.php');
-    }else{
+    } else {
         $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Failed to delete Teacher
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -295,7 +294,7 @@ if (isset($_POST['add_assignment'])) {
                                 </div>
                                 <br>';
         header('Location: ../admin/assignment.php');
-    }else{
+    } else {
         $query = "INSERT INTO assignment (class, subject, question_1, question_2, question_3, question_4, question_5, assignment_type) 
             VALUE('$class', '$subject', '$question_1', '$question_2', '$question_3', '$question_4', '$question_5', '$assignment_type')";
 
@@ -307,7 +306,7 @@ if (isset($_POST['add_assignment'])) {
                                 </div>
                                 <br>';
             header('Location: ../admin/assignment.php');
-        }else{
+        } else {
             $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Failed to add assignment
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -333,7 +332,7 @@ if (isset($_POST['delete_assignment'])) {
                                 </div>
                                 <br>';
         header('Location: ../admin/assignment.php');
-    }else{
+    } else {
         $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Failed to delete assignment
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -364,7 +363,7 @@ if (isset($_POST['update_assignment'])) {
                                 </div>
                                 <br>';
         header('Location: ../admin/assignment_edit.php');
-    }else{
+    } else {
         $query = "UPDATE assignment SET class='$class', subject='$subject', question_1='$question_1', question_2='$question_2', question_3='$question_3', 
             question_4='$question_4', question_5='$question_5', assignment_type='$assignment_type' WHERE id='$id'";
         $run_query = mysqli_query($con, $query);
@@ -376,7 +375,7 @@ if (isset($_POST['update_assignment'])) {
                                 </div>
                                 <br>';
             header('Location: ../admin/assignment.php');
-        }else{
+        } else {
             $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Failed to update assignment 
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -392,19 +391,20 @@ if (isset($_POST['update_assignment'])) {
 // code for student report
 if (isset($_POST['student_report'])) {
     // reportdetails
-    $username = mysqli_real_escape_string($con, $_POST['username']);
+    // $username = mysqli_real_escape_string($con, $_POST['username']);
+    $username = mysqli_real_escape_string($con, $_SESSION['username']);
     $tile = mysqli_real_escape_string($con, $_POST['title']);
     $complain = mysqli_real_escape_string($con, $_POST['complain']);
 
     // checking for error
-    if (empty($username) || empty($tile) || empty($complain)) {
+    if (empty($tile) || empty($complain)) {
         $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> please fill out all the fields
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                                 <br>';
         header('Location: ../student/report_issue.php');
-    }else{
+    } else {
         $query = "INSERT INTO report (username, title, complain) VALUE ('$username', '$tile', '$complain')";
         $run_query = mysqli_query($con, $query);
 
@@ -415,7 +415,7 @@ if (isset($_POST['student_report'])) {
                                 </div>
                                 <br>';
             header('Location: ../student/report_issue.php');
-        }else{
+        } else {
             $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Error while delivering your report, try again later
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -442,7 +442,7 @@ if (isset($_POST['delete_report'])) {
                                 </div>
                                 <br>';
         header('Location: ../admin/reports.php');
-    }else{
+    } else {
         $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Hey,</strong> Failed to delete report
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -453,3 +453,103 @@ if (isset($_POST['delete_report'])) {
     mysqli_close($con);
 }
 
+
+// code for adding result to database
+if (isset($_POST['add_result'])) {
+    // result data 
+    $term = mysqli_real_escape_string($con, $_POST['term']);
+    $class = mysqli_real_escape_string($con, $_POST['class']);
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $subject = mysqli_real_escape_string($con, $_POST['subject']);
+    $first_test = mysqli_real_escape_string($con, $_POST['first_test']);
+    $second_test = mysqli_real_escape_string($con, $_POST['second_test']);
+    $exam = mysqli_real_escape_string($con, $_POST['exam']);
+    $total = mysqli_real_escape_string($con, $_POST['total']);
+    $grade = mysqli_real_escape_string($con, $_POST['grade']);
+
+    // validating inputed data
+    if ($first_test > 15 || $second_test > 15) {
+        $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> The test score is greater than 15
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+        header('Location: ../admin/add_result.php');
+    } else {
+        if ($exam > 70) {
+            $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> The exam score is greater than 70
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/add_result.php');
+        } else {
+            $query = "INSERT INTO result (term, username, class, subject, 1st_test, 2nd_test, exams, total, grade) 
+                VALUE('$term', '$username', '$class', '$subject', '$first_test', '$second_test', '$exam', '$total', '$grade')";
+            $run_query = mysqli_query($con, $query);
+
+            if ($run_query) {
+                $_SESSION['message'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Result uploaded successfully
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+                header('Location: ../admin/add_result.php');
+            } else {
+                $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Error uploading result, try again
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+                header('Location: ../admin/add_result.php');
+            }
+        }
+    }
+    mysqli_close($con);
+}
+
+
+// code for updating result
+if (isset($_POST['update_result'])) {
+    // updated result data
+    $id = mysqli_real_escape_string($con, $_POST['id']);
+    $term = mysqli_real_escape_string($con, $_POST['term']);
+    $class = mysqli_real_escape_string($con, $_POST['class']);
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $subject = mysqli_real_escape_string($con, $_POST['subject']);
+    $first_test = mysqli_real_escape_string($con, $_POST['first_test']);
+    $second_test = mysqli_real_escape_string($con, $_POST['second_test']);
+    $exam = mysqli_real_escape_string($con, $_POST['exam']);
+    $total = mysqli_real_escape_string($con, $_POST['total']);
+    $grade = mysqli_real_escape_string($con, $_POST['grade']);
+
+    // checking error
+    if ($first_test > 15 || $second_test > 15 || $exam > 70) {
+        $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> One of your record fields value is greater than it maximum value
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+        header('Location: ../admin/result_edit.php');
+    } else {
+        $query = "UPDATE result SET term='$term', username='$username', class='$class', subject='$subject', 1st_test='$first_test', 2nd_test='$second_test', exams='$exam', total='$total', grade='$grade' WHERE id='$id'";
+        $run_query = mysqli_query($con, $query);
+
+        if ($run_query) {
+            $_SESSION['message'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Result updated successfully
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/add_result.php');
+        } else {
+            $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Failed to update result
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/add_result.php');
+        }
+    }
+    mysqli_close($con);
+}

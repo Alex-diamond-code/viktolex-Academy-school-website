@@ -35,7 +35,7 @@ if ($_SESSION['usertype'] == 'admin') {
 				<span class="text-muted px-2"><i>Note that all fields are required</i></span>
 				<form action="../controller/server.php" method="POST" class="my-4">
 					<div class="mb-3">
-						<input class="form-control" placeholder="Input your Username" name="username" required>
+						<input class="form-control" placeholder="Input your Username" name="username" value="<?php echo $_SESSION['username'] ?>" required disabled>
 					</div>
 					<div class="mb-3">
 						<input class="form-control" placeholder="Title" name="title" required>
@@ -57,7 +57,7 @@ if ($_SESSION['usertype'] == 'admin') {
 
 	<!-- footer section -->
 	<?php include './assests/includes/footer.php' ?>
-	
+
 </section>
 
 
