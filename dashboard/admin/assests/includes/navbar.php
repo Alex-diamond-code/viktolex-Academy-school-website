@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-brand i-name">
             <p class="mb-0">Dashboard</p>
-            <span><?php echo date("D d/M/Y ") ?></span>
+            <span class="text-white"><?php echo date("D d/M/Y ") ?></span>
         </div>
         <!-- Button trigger modal -->
         <button type="button" class="btn main_btn mx-2 ms-auto text-white" id="main_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</button>

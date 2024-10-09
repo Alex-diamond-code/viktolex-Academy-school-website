@@ -166,9 +166,10 @@ if (isset($_POST['update_student'])) {
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
     $address = mysqli_real_escape_string($con, $_POST['address']);
+    $status = mysqli_real_escape_string($con, $_POST['status']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
-    $query = "UPDATE users SET fullname='$f_name', email='$email', phone='$phonenumber', username='$username', gender='$gender', address='$address', password='$password' WHERE id='$id'";
+    $query = "UPDATE users SET fullname='$f_name', email='$email', phone='$phonenumber', username='$username', gender='$gender', address='$address', password='$password', status='$status' WHERE id='$id'";
     $run_query = mysqli_query($con, $query);
 
     if ($run_query) {
@@ -549,6 +550,72 @@ if (isset($_POST['update_result'])) {
                                 </div>
                                 <br>';
             header('Location: ../admin/add_result.php');
+        }
+    }
+    mysqli_close($con);
+}
+
+
+// code for deleting result
+if (isset($_POST['delete_result'])) {
+    $id = $_POST['delete_id'];
+    // print_r($id);
+
+    $query = "DELETE FROM result WHERE id='$id'";
+    $run_query = mysqli_query($con, $query);
+
+    if ($run_query) {
+        $_SESSION['message'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Result deleted successfully
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+        header('Location: ../admin/add_result.php');
+    }else{
+        $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Failed to delete result
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+        header('Location: ../admin/add_result.php');
+    }
+    mysqli_close($con);
+}
+
+
+// code for adding
+if (isset($_POST['add_subject'])) {
+    // subject data
+    $sub_name = mysqli_real_escape_string($con, $_POST['subject_name']);
+    $sub_description = mysqli_real_escape_string($con, $_POST['description']);
+    $sub_status = mysqli_real_escape_string($con, $_POST['status']);
+
+    // checking for error
+    if (empty($sub_name) || empty($sub_description)) {
+        $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Do not leave an empty input field
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+        header('Location: ../admin/curriculum.php');
+    }else{
+        $query = "INSERT INTO `subject`(subject_name, description, status) VALUE ('$sub_name', '$sub_description', '$sub_status')";
+        $run_query = mysqli_query($con, $query);
+
+        if ($run_query) {
+            $_SESSION['message'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Subject created successfully
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/curriculum.php');
+        }else{
+            $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Fail to create subject
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/curriculum.php');
         }
     }
     mysqli_close($con);

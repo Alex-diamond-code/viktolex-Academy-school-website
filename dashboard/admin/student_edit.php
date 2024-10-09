@@ -27,30 +27,41 @@ if ($_SESSION['usertype'] == 'student') {
     <div class="row my-5">
         <div class="col-lg-6 col-md-6 col-12">
             <?php
-                if (isset($_GET['id'])) {
-                    // print_r($_GET['id']);
-                    $id = $_GET['id'];
-                    $query = "SELECT * FROM users WHERE id='$id'";
-                    $run_query = mysqli_query($con, $query);
+            if (isset($_GET['id'])) {
+                // print_r($_GET['id']);
+                $id = $_GET['id'];
+                $query = "SELECT * FROM users WHERE id='$id'";
+                $run_query = mysqli_query($con, $query);
 
-                    $student_data = mysqli_fetch_assoc($run_query);
+                $student_data = mysqli_fetch_assoc($run_query);
 
-                    // print_r($student_data['username']);
-                }
+                // print_r($student_data['username']);
+            }
             ?>
             <form action="../controller/server.php" method="POST" class="my-1">
                 <input type="text" class="form-control" id="id" placeholder="id" name="id" hidden value="<?php echo $student_data['id'] ?>">
                 <div class="mb-3">
+
                     <input type="text" class="form-control" id="fullname" placeholder="Fullname" name="fullname" required value="<?php echo $student_data['fullname'] ?>">
                 </div>
                 <div class="mb-3">
                     <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required value="<?php echo $student_data['email'] ?>">
                 </div>
                 <div class="mb-3">
+
                     <input type="text" class="form-control" id="phonenumber" placeholder="Phone number" name="phonenumber" required value="<?php echo $student_data['phone'] ?>">
                 </div>
                 <div class="mb-3">
+
                     <input type="text" class="form-control" id="username" placeholder="Username" name="username" required value="<?php echo $student_data['username'] ?>">
+                </div>
+                <div class="mb-3">
+                    <select class="form-control" name="status" id="status" required>
+                        <option value="<?php echo $student_data['status'] ?>" selected><?php echo $student_data['status'] ?></option>
+                        <hr>
+                        <option value="Active">Active</option>
+                        <option value="Disabled">Disabled</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <select class="form-control" name="gender" id="gender" required>
@@ -61,9 +72,11 @@ if ($_SESSION['usertype'] == 'student') {
                     </select>
                 </div>
                 <div class="mb-3">
+
                     <input type="text" class="form-control" id="address" placeholder="address" name="address" required value="<?php echo $student_data['address'] ?>">
                 </div>
                 <div class="mb-3">
+
                     <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required value="<?php echo $student_data['password'] ?>">
                 </div>
 
@@ -83,7 +96,7 @@ if ($_SESSION['usertype'] == 'student') {
 
 
     <!-- footer -->
-	<?php include "./assests/includes/footer.php" ?>
+    <?php include "./assests/includes/footer.php" ?>
 </section>
 
 

@@ -40,7 +40,7 @@ if ($_SESSION['usertype'] == 'student') {
 				<h4 class="font-poppins fw-bold">Overview</h4>
 			</div>
 		</div>
-		<div class="row gy-3">
+		<div class="row gy-2 gx-2">
 			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
 					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: rgb(195 115 0);">
@@ -107,6 +107,100 @@ if ($_SESSION['usertype'] == 'student') {
 						<h5 class="fw-bold">Total Reports</h5>
 						<?php
 						$query = "SELECT * FROM report";
+						$run_query = mysqli_query($con, $query);
+
+						$result = mysqli_num_rows($run_query);
+
+						if ($result) {
+						?>
+							<p><?= $result ?></p>
+						<?php } elseif ($result <= 0) {
+						?>
+							<p>0</p>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row gy-2 gx-2 mb-2" style="padding-top: 10px;">
+			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
+				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
+					<div class="icon_box d-flex align-items-center justify-content-center " style="background-color: rgb(15 15 110);">
+						<i class="fas fa-file-alt"></i>
+					</div>
+					<div class="summary_details">
+						<h5 class="fw-bold">Total Results</h5>
+						<?php
+						$query = "SELECT * FROM result";
+						$run_query = mysqli_query($con, $query);
+
+						$result = mysqli_num_rows($run_query);
+
+						if ($result) {
+						?>
+							<p><?= $result ?></p>
+						<?php } elseif ($result <= 0) {
+						?>
+							<p>0</p>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
+				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
+					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: rgb(0, 110, 0);">
+						<i class="fas fa-user-graduate"></i>
+					</div>
+					<div class="summary_details">
+						<h5 class="fw-bold">Active Student</h5>
+						<?php
+						$query = "SELECT * FROM users WHERE usertype='student' AND status='Active'";
+						$run_query = mysqli_query($con, $query);
+
+						$result = mysqli_num_rows($run_query);
+
+						if ($result) {
+						?>
+							<p><?= $result ?></p>
+						<?php } elseif ($result <= 0) {
+						?>
+							<p>0</p>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
+				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
+					<div class="icon_box d-flex align-items-center justify-content-center mx-2" style="background-color: rgb(110 0 0); margin-right: 15px;">
+						<i class="fas fa-user-graduate"></i>
+					</div>
+					<div class="summary_details">
+						<h5 class="fw-bold text-wrap">Inactive Student</h5>
+						<?php
+						$query = "SELECT * FROM users WHERE usertype='student' AND status='Disabled'";
+						$run_query = mysqli_query($con, $query);
+
+						$result = mysqli_num_rows($run_query);
+
+						if ($result) {
+						?>
+							<p><?= $result ?></p>
+						<?php } elseif ($result <= 0) {
+						?>
+							<p>0</p>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
+				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
+					<div class="icon_box d-flex align-items-center justify-content-center mx-2" style="background-color: rgb(215 200 8);">
+						<i class="fas fa-book"></i>
+					</div>
+					<div class="summary_details">
+						<h5 class="fw-bold">Assignments</h5>
+						<?php
+						$query = "SELECT * FROM assignment";
 						$run_query = mysqli_query($con, $query);
 
 						$result = mysqli_num_rows($run_query);

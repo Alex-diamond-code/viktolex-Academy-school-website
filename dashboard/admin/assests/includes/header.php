@@ -36,6 +36,7 @@
 		<div class="offcanvas-body p-0">
 			<ul class="navbar-nav justify-content-end flex-grow-1 menu">
 				<li class="nav-item"><i class="fas fa-home"></i><a href="./admin.php">Home</a></li>
+				<li class="nav-item"><i class="fas fa-school"></i><a href="./curriculum.php">Curriculum</a></li>
 				<li class="nav-item"><i class="fas fa-user-graduate"></i><a href="./add_student.php">Student Enrollment</a></li>
 				<li class="nav-item"><i class="fas fa-user-plus"></i><a href="./add_teacher.php">Teacher Enrollment</a></li>
 				<li class="nav-item"><i class="fas fa-user-check"></i><a href="./student_record.php">Student Record</a></li>

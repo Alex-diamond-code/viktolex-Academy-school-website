@@ -94,7 +94,7 @@ if ($_SESSION['usertype'] == 'student') {
 		<!-- add student form section -->
 		<div class="mt-4">
 			<h4 class="font-poppins fw-bold">Add Student</h4>
-			<div class="add_form row mt-4" style="background-color: rgb(255, 255, 255); padding: 30px; border-radius:20px; backdrop-filter: blur(10px);">
+			<div class="add_form row mt-4" style="background-color: rgb(255, 255, 255); padding: 30px; border-radius:0.75rem;">
 
 				<div class="col-lg-6 col-md-6 col-12 my-auto">
 					<span class="text-muted px-2"><i>Note that all fields are require</i></span>
@@ -128,9 +128,6 @@ if ($_SESSION['usertype'] == 'student') {
 							<button type="submit" class="btn btn-success" name="add_student">Add Student</button>
 							<a href="./add_teacher.php" class="btn btn-primary ms-5">Add Teachers</a>
 						</div>
-
-						<!-- <button type="submit" class="btn btn-success mx-5" name="add_student">Add Student</button> -->
-
 					</form>
 				</div>
 				<div class="col-lg-6 col-md-6 col-12 d-flex align-items-center justify-content-lg-center">
