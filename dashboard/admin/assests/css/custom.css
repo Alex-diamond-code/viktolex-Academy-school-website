@@ -25,6 +25,9 @@
 .bg-accent{
   background: var(--accent-color);
 }
+.bg-border{
+  border: 3px solid var(--accent-color);
+}
 
 body {
   width: 100%;

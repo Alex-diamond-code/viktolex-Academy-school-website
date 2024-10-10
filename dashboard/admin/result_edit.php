@@ -61,15 +61,13 @@ if ($_SESSION['usertype'] == 'student') {
                         <div class="mb-3">
                             <select class="form-control" name="class" id="class" required>
                                 <option value="<?php echo $result_data['class'] ?>" selected><?php echo $result_data['class'] ?></option>
-                                <option value="Reception">Reception</option>
-                                <option value="Transition">Transition</option>
-                                <option value="Nursery 1">Nursery 1</option>
-                                <option value="Nursery 2">Nursery 2</option>
-                                <option value="Primary 1">Primary 1</option>
-                                <option value="Primary 2">Primary 2</option>
-                                <option value="Primary 3">Primary 3</option>
-                                <option value="Primary 4">Primary 4</option>
-                                <option value="Primary 5">Primary 5</option>
+                                <?php
+                                $query = "SELECT * FROM `class` WHERE status='Active'";
+                                $run_query = mysqli_query($con, $query);
+                                while ($class = mysqli_fetch_assoc($run_query)) {
+                                ?>
+                                    <option value="<?php echo $class['class_name'] ?>"><?php echo $class['class_name'] ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -91,11 +89,13 @@ if ($_SESSION['usertype'] == 'student') {
                         <div class="mb-3">
                             <select class="form-control" name="subject" id="Subject" required>
                                 <option value="<?php echo $result_data['subject'] ?>" selected><?php echo $result_data['subject'] ?></option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="English">English</option>
-                                <option value="Basic Science">Basic Science</option>
-                                <option value="CRS">CRS</option>
-                                <option value="Quantitative">Quantitative</option>
+                                <?php
+                                $query = "SELECT * FROM `subject` WHERE status='Active'";
+                                $run_query = mysqli_query($con, $query);
+                                while ($subject = mysqli_fetch_assoc($run_query)) {
+                                ?>
+                                    <option value="<?php echo $subject['subject_name'] ?>"><?php echo $subject['subject_name'] ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3">

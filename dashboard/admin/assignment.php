@@ -99,28 +99,24 @@ if ($_SESSION['usertype'] == 'student') {
 				<form action="../controller/server.php" method="POST" class="my-4">
 					<div class="mb-3">
 						<select class="form-control" name="class" id="class" required>
-							<option value="Reception">Reception</option>
-							<option value="Transition">Transition</option>
-							<option value="Nursery 1">Nursery 1</option>
-							<option value="Nursery 2">Nursery 2</option>
-							<option value="Primary 1">Primary 1</option>
-							<option value="Primary 2">Primary 2</option>
-							<option value="Primary 3">Primary 3</option>
-							<option value="Primary 4">Primary 4</option>
-							<option value="Primary 5">Primary 5</option>
+							<?php
+							$query = "SELECT * FROM `class` WHERE status='Active'";
+							$run_query = mysqli_query($con, $query);
+							while ($class = mysqli_fetch_assoc($run_query)) {
+							?>
+								<option value="<?php echo $class['class_name'] ?>"><?php echo $class['class_name'] ?></option>
+							<?php } ?>
 						</select>
 					</div>
 					<div class="mb-3">
 						<select class="form-control" name="subject" id="Subject" required>
-							<option value="Mathematics">Mathematics</option>
-							<option value="English">English</option>
-							<option value="Basic Science">Basic Science</option>
-							<option value="CRS">CRS</option>
-							<option value="Quantitative">Quantitative</option>
-							<!-- <option value="Primary 2">Primary 2</option>
-							<option value="Primary 3">Primary 3</option>
-							<option value="Primary 4">Primary 4</option>
-							<option value="Primary 5">Primary 5</option> -->
+							<?php
+							$query = "SELECT * FROM `subject` WHERE status='Active'";
+							$run_query = mysqli_query($con, $query);
+							while ($subject = mysqli_fetch_assoc($run_query)) {
+							?>
+								<option value="<?php echo $subject['subject_name'] ?>"><?php echo $subject['subject_name'] ?></option>
+							<?php } ?>
 						</select>
 					</div>
 					<div class="mb-3">
@@ -244,26 +240,27 @@ if ($_SESSION['usertype'] == 'student') {
 
 <script>
 	$(document).ready(function() {
-  		$('#example').DataTable({
-    		//disable sorting on last column
-    		"columnDefs": [
-    		  { "orderable": false, "targets": 3 }
-    		],
-    		language: {
-    		  'paginate': {
-    		    'previous': '<span class="fa fa-chevron-left"></span>',
-    		    'next': '<span class="fa fa-chevron-right"></span>'
-    		  },
-    		  "lengthMenu": 'Display <select class="form-control input-sm">'+
-    		  '<option value="10" selected>10</option>'+
-    		  '<option value="20">20</option>'+
-    		  '<option value="30">30</option>'+
-    		  '<option value="40">40</option>'+
-    		  '<option value="50">50</option>'+
-    		  '<option value="-1">All</option>'+
-    		  '</select> results'
-    		}
-  		}) ; 
+		$('#example').DataTable({
+			//disable sorting on last column
+			"columnDefs": [{
+				"orderable": false,
+				"targets": 3
+			}],
+			language: {
+				'paginate': {
+					'previous': '<span class="fa fa-chevron-left"></span>',
+					'next': '<span class="fa fa-chevron-right"></span>'
+				},
+				"lengthMenu": 'Display <select class="form-control input-sm">' +
+					'<option value="10" selected>10</option>' +
+					'<option value="20">20</option>' +
+					'<option value="30">30</option>' +
+					'<option value="40">40</option>' +
+					'<option value="50">50</option>' +
+					'<option value="-1">All</option>' +
+					'</select> results'
+			}
+		});
 	});
 </script>
 </body>

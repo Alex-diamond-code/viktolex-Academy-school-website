@@ -620,3 +620,42 @@ if (isset($_POST['add_subject'])) {
     }
     mysqli_close($con);
 }
+
+
+// code for adding classes
+if (isset($_POST['add_class'])) {
+    // subject data
+    $class_name = mysqli_real_escape_string($con, $_POST['class_name']);
+    $class_description = mysqli_real_escape_string($con, $_POST['description']);
+    $class_status = mysqli_real_escape_string($con, $_POST['status']);
+
+    // checking for error
+    if (empty($class_name) || empty($class_description)) {
+        $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> No field should be empty
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+        header('Location: ../admin/curriculum.php');
+    } else {
+        $query = "INSERT INTO `class`(class_name, description, status) VALUE ('$class_name', '$class_description', '$class_status')";
+        $run_query = mysqli_query($con, $query);
+
+        if ($run_query) {
+            $_SESSION['message'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Class created successfully
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/curriculum.php');
+        }else{
+            $_SESSION['message'] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey,</strong> Failed to create class
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <br>';
+            header('Location: ../admin/curriculum.php');
+        }
+    }
+    mysqli_close($con);
+}

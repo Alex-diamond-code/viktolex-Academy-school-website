@@ -49,15 +49,13 @@ if ($_SESSION['usertype'] == 'student') {
                         </div>
                         <div class="mb-3">
                             <select class="form-control" name="class" id="class" required>
-                                <option value="Reception">Reception</option>
-                                <option value="Transition">Transition</option>
-                                <option value="Nursery 1">Nursery 1</option>
-                                <option value="Nursery 2">Nursery 2</option>
-                                <option value="Primary 1">Primary 1</option>
-                                <option value="Primary 2">Primary 2</option>
-                                <option value="Primary 3">Primary 3</option>
-                                <option value="Primary 4">Primary 4</option>
-                                <option value="Primary 5">Primary 5</option>
+                                <?php
+                                $query = "SELECT * FROM `class` WHERE status='Active'";
+                                $run_query = mysqli_query($con, $query);
+                                while ($class = mysqli_fetch_assoc($run_query)) {
+                                ?>
+                                    <option value="<?php echo $class['class_name'] ?>"><?php echo $class['class_name'] ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -78,11 +76,13 @@ if ($_SESSION['usertype'] == 'student') {
                     <div class="col-lg-4 col-md-6 col-12 px-2">
                         <div class="mb-3">
                             <select class="form-control" name="subject" id="Subject" required>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="English">English</option>
-                                <option value="Basic Science">Basic Science</option>
-                                <option value="CRS">CRS</option>
-                                <option value="Quantitative">Quantitative</option>
+                                <?php
+                                $query = "SELECT * FROM `subject` WHERE status='Active'";
+                                $run_query = mysqli_query($con, $query);
+                                while ($subject = mysqli_fetch_assoc($run_query)) {
+                                ?>
+                                    <option value="<?php echo $subject['subject_name'] ?>"><?php echo $subject['subject_name'] ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -100,7 +100,7 @@ if ($_SESSION['usertype'] == 'student') {
                             <input type="number" class="form-control" id="total" placeholder="Total" value="" name="total" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="grade" placeholder="Grade" name="grade" required >
+                            <input type="text" class="form-control" id="grade" placeholder="Grade" name="grade" required>
                         </div>
                     </div>
                 </div>
@@ -116,80 +116,80 @@ if ($_SESSION['usertype'] == 'student') {
 
     <!-- display of result data -->
     <div class="mt-4 table-responsive">
-		<h4 class="font-poppins fw-bold">List of Result</h4>
-		<table class="table table-striped table-bordered table-light" id="example">
-			<thead>
-				<tr>
-					<th scope="col" class="text-white bg-dark">Term</th>
-					<th scope="col" class="text-white bg-dark">Username</th>
-					<th scope="col" class="text-white bg-dark">Class</th>
-					<th scope="col" class="text-white bg-dark">Subject</th>
-					<th scope="col" class="text-white bg-dark">Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				$query = "SELECT * FROM result";
-				$run_query = mysqli_query($con, $query);
+        <h4 class="font-poppins fw-bold">List of Result</h4>
+        <table class="table table-striped table-bordered table-light" id="example">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-white bg-dark">Term</th>
+                    <th scope="col" class="text-white bg-dark">Username</th>
+                    <th scope="col" class="text-white bg-dark">Class</th>
+                    <th scope="col" class="text-white bg-dark">Subject</th>
+                    <th scope="col" class="text-white bg-dark">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT * FROM result";
+                $run_query = mysqli_query($con, $query);
 
-				while ($row_data = mysqli_fetch_assoc($run_query)) {
-				?>
-					<tr>
-						<td><?php echo $row_data['term'] ?></td>
-						<td><?php echo $row_data['username'] ?></td>
-						<td><?php echo $row_data['class'] ?></td>
-						<td><?php echo $row_data['subject'] ?></td>
-						<td>
-							<div class="dropdown">
-								<button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-									Action
-								</button>
-								<ul class="dropdown-menu px-2">
-									<li><a href="./result_edit.php?id=<?php echo $row_data['id'] ?>" class="dropdown-item bg-info text-center text-white mb-2 rounded-2 py-2"><i class="fas fa-edit mx-2"></i>Edit</a></li>
-									<!-- Button trigger modal -->
-									<li>
-										<button class="dropdown-item bg-danger text-center text-white rounded-2 py-2" data-bs-toggle="modal" data-bs-target="#delete_result_<?php echo $row_data['id'] ?>"> <i class="fas fa-trash mx-2"></i>Delete</button>
-									</li>
-								</ul>
-							</div>
-						</td>
-					</tr>
-				<?php } ?>
-			</tbody>
-		</table>
-		<br><br>
-	</div>
+                while ($row_data = mysqli_fetch_assoc($run_query)) {
+                ?>
+                    <tr>
+                        <td><?php echo $row_data['term'] ?></td>
+                        <td><?php echo $row_data['username'] ?></td>
+                        <td><?php echo $row_data['class'] ?></td>
+                        <td><?php echo $row_data['subject'] ?></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Action
+                                </button>
+                                <ul class="dropdown-menu px-2">
+                                    <li><a href="./result_edit.php?id=<?php echo $row_data['id'] ?>" class="dropdown-item bg-info text-center text-white mb-2 rounded-2 py-2"><i class="fas fa-edit mx-2"></i>Edit</a></li>
+                                    <!-- Button trigger modal -->
+                                    <li>
+                                        <button class="dropdown-item bg-danger text-center text-white rounded-2 py-2" data-bs-toggle="modal" data-bs-target="#delete_result_<?php echo $row_data['id'] ?>"> <i class="fas fa-trash mx-2"></i>Delete</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
 
 
     <!-- delete result section -->
-	<!-- Modal -->
-	<?php
-	$query = "SELECT * FROM result";
-	$run_query = mysqli_query($con, $query);
+    <!-- Modal -->
+    <?php
+    $query = "SELECT * FROM result";
+    $run_query = mysqli_query($con, $query);
 
-	while ($row_data = mysqli_fetch_assoc($run_query)) {
-	?>
-		<div class="modal fade" id="delete_result_<?php echo $row_data['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Result</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						Are sure you want to delete this result !!!
-					</div>
-					<div class="modal-footer">
-						<form action="../controller/server.php" method="POST">
-							<input hidden name="delete_id" value="<?php echo $row_data['id'] ?>">
-							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancel</button>
-							<button type="submit" name="delete_result" class="btn btn-success" data-bs-dismiss="modal">Delete</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	<?php } ?>
+    while ($row_data = mysqli_fetch_assoc($run_query)) {
+    ?>
+        <div class="modal fade" id="delete_result_<?php echo $row_data['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Result</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are sure you want to delete this result !!!
+                    </div>
+                    <div class="modal-footer">
+                        <form action="../controller/server.php" method="POST">
+                            <input hidden name="delete_id" value="<?php echo $row_data['id'] ?>">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancel</button>
+                            <button type="submit" name="delete_result" class="btn btn-success" data-bs-dismiss="modal">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 
 </section>
 
@@ -201,27 +201,28 @@ if ($_SESSION['usertype'] == 'student') {
 
 <script>
     $(document).ready(function() {
-  		$('#example').DataTable({
-    		//disable sorting on last column
-    		"columnDefs": [
-    		  { "orderable": false, "targets": 3 }
-    		],
-    		language: {
-    		  'paginate': {
-    		    'previous': '<span class="fa fa-chevron-left"></span>',
-    		    'next': '<span class="fa fa-chevron-right"></span>'
-    		  },
-    		  "lengthMenu": 'Display <select class="form-control input-sm">'+
-    		  '<option value="10" selected>10</option>'+
-    		  '<option value="20">20</option>'+
-    		  '<option value="30">30</option>'+
-    		  '<option value="40">40</option>'+
-    		  '<option value="50">50</option>'+
-    		  '<option value="-1">All</option>'+
-    		  '</select> results'
-    		}
-  		}) ; 
-	});
+        $('#example').DataTable({
+            //disable sorting on last column
+            "columnDefs": [{
+                "orderable": false,
+                "targets": 3
+            }],
+            language: {
+                'paginate': {
+                    'previous': '<span class="fa fa-chevron-left"></span>',
+                    'next': '<span class="fa fa-chevron-right"></span>'
+                },
+                "lengthMenu": 'Display <select class="form-control input-sm">' +
+                    '<option value="10" selected>10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="40">40</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">All</option>' +
+                    '</select> results'
+            }
+        });
+    });
 </script>
 </body>
 
