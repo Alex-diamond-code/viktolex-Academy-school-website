@@ -84,7 +84,7 @@ if ($_SESSION['usertype'] == 'admin') {
 				$class = mysqli_real_escape_string($con, $_POST['class']);
 				$subject = mysqli_real_escape_string($con, $_POST['subject']);
 
-				$query = "SELECT * FROM assignment WHERE class='$class' AND subject='$subject'";
+				$query = "SELECT * FROM `assignment` WHERE class='$class' AND subject='$subject'";
 				$run_query = mysqli_query($con, $query);
 
 

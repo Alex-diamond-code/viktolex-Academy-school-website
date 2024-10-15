@@ -17,6 +17,7 @@
 
 	<link rel="stylesheet" href="./assests/css/custom.css" />
 	<link rel="stylesheet" href="./assests/css/all.min.css">
+	<link rel="stylesheet" href="./assests/css/responsive.bootstrap5.css">
 </head>
 
 <body>
@@ -60,7 +61,8 @@
 						</span></a></li>
 				<li class="nav-item"><i class="fas fa-book"></i><a href="./assignment.php">Assignment</a></li>
 				<li class="nav-item"><i class="fas fa-file-alt"></i><a href="./add_result.php">Add Result</a></li>
-				<li class="nav-item"><i class="fas fa-chart-pie"></i><a href="./fee_analysis.php">Fee Analysis</a></li>
+				<!-- <li class="nav-item"><i class="fas fa-chart-pie"></i><a href="./fee_analysis.php">Fee Analysis</a></li> -->
+				<li class="nav-item"><i class="fas fa-cog"></i><a href="./admin_setting.php">Settings</a></li>
 				<!-- Button trigger modal -->
 				<li><i class="fas fa-sign-out-alt"></i><a href="#" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">logout</a></li>
 			</ul>

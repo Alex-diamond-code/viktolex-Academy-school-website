@@ -64,13 +64,13 @@ while ($row_data = mysqli_fetch_assoc($run_query)) {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Trying to logout</h1>
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Trying to delete report</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form action="../controller/server.php" method="post">
 						<input type="text" name="id" value="<?php echo $row_data['id'] ?>" hidden>
-						Are you sure you want to logout form your dashboard
+						Are you sure you want to delete this report
 						<div class="modal-footer mt-1">
 							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancel</button>
 							<button type="submit" class="btn btn-success" name="delete_report">Delete</button>

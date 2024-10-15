@@ -42,6 +42,7 @@ if ($_SESSION['usertype'] == 'student') {
                     <div class="col-lg-4 col-md-6 col-12 px-2">
                         <div class="mb-3">
                             <select class="form-control" name="term" id="term" required>
+                                <option value="" selected disabled hidden>Select term</option>
                                 <option value="First Term">First Term</option>
                                 <option value="Second Term">Second Term</option>
                                 <option value="Third Term">Third Term</option>
@@ -49,6 +50,7 @@ if ($_SESSION['usertype'] == 'student') {
                         </div>
                         <div class="mb-3">
                             <select class="form-control" name="class" id="class" required>
+                                <option value="" selected disabled hidden>Select class</option>
                                 <?php
                                 $query = "SELECT * FROM `class` WHERE status='Active'";
                                 $run_query = mysqli_query($con, $query);
@@ -76,6 +78,7 @@ if ($_SESSION['usertype'] == 'student') {
                     <div class="col-lg-4 col-md-6 col-12 px-2">
                         <div class="mb-3">
                             <select class="form-control" name="subject" id="Subject" required>
+                                <option value="" selected disabled hidden>Select subject</option>
                                 <?php
                                 $query = "SELECT * FROM `subject` WHERE status='Active'";
                                 $run_query = mysqli_query($con, $query);
@@ -103,6 +106,20 @@ if ($_SESSION['usertype'] == 'student') {
                             <input type="text" class="form-control" id="grade" placeholder="Grade" name="grade" required>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-6 col-12 px-2">
+                        <div class="mb-3">
+                            <select class="form-control" name="session" id="session" required>
+                                <option value="" selected disabled hidden>Select session</option>
+                                <?php
+                                $query = "SELECT * FROM `session` WHERE s_status='Active' ORDER BY id DESC";
+                                $run_query = mysqli_query($con, $query);
+                                while ($session = mysqli_fetch_assoc($run_query)) {
+                                ?>
+                                    <option value="<?php echo $session['s_name'] ?>"><?php echo $session['s_name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-between align-items-center">
@@ -124,6 +141,7 @@ if ($_SESSION['usertype'] == 'student') {
                     <th scope="col" class="text-white bg-dark">Username</th>
                     <th scope="col" class="text-white bg-dark">Class</th>
                     <th scope="col" class="text-white bg-dark">Subject</th>
+                    <th scope="col" class="text-white bg-dark">Session</th>
                     <th scope="col" class="text-white bg-dark">Action</th>
                 </tr>
             </thead>
@@ -139,6 +157,7 @@ if ($_SESSION['usertype'] == 'student') {
                         <td><?php echo $row_data['username'] ?></td>
                         <td><?php echo $row_data['class'] ?></td>
                         <td><?php echo $row_data['subject'] ?></td>
+                        <td><?php echo $row_data['session'] ?></td>
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -191,6 +210,9 @@ if ($_SESSION['usertype'] == 'student') {
         </div>
     <?php } ?>
 
+
+    <!-- footer -->
+    <?php include "./assests/includes/footer.php" ?>
 </section>
 
 
@@ -205,7 +227,7 @@ if ($_SESSION['usertype'] == 'student') {
             //disable sorting on last column
             "columnDefs": [{
                 "orderable": false,
-                "targets": 3
+                "targets": 5
             }],
             language: {
                 'paginate': {

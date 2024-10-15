@@ -35,4 +35,3 @@ exam.addEventListener('keyup', () => {
   }
 
 });
-

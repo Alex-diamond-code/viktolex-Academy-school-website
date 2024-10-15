@@ -24,7 +24,7 @@ if ($_SESSION['usertype'] == 'student') {
 				<p>Welcome to your dashboard, let start working.</p>
 				<div class="m-2">
 					<a href="./add_student.php" class="sub_btn">Enroll</a>
-					<a href="./fee_analysis.php" class="sub_btn">Analysis</a>
+					<a href="./student_record.php" class="sub_btn">Records</a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-6 bar_image d-flex justify-content-lg-end justify-content-center">
@@ -90,11 +90,23 @@ if ($_SESSION['usertype'] == 'student') {
 			<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 				<div class="summary_block d-flex align-items-center justify-content-around font-poppins">
 					<div class="icon_box d-flex align-items-center justify-content-center" style="background-color: #165e05;">
-						<i class="fas fa-coins"></i>
+						<i class="fa-solid fa-bullhorn"></i>
 					</div>
 					<div class="summary_details">
-						<h5 class="fw-bold">Total income</h5>
-						<p><i class="fas fa-naira-sign"></i>1000</p>
+						<h5 class="fw-bold">Anouncement</h5>
+						<?php
+						$query = "SELECT * FROM anouncement";
+						$run_query = mysqli_query($con, $query);
+
+						$result = mysqli_num_rows($run_query);
+
+						if ($result) {
+						?>
+							<p><?= $result ?></p>
+						<?php } elseif ($result <= 0) {
+						?>
+							<p>0</p>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
@@ -217,12 +229,17 @@ if ($_SESSION['usertype'] == 'student') {
 			</div>
 		</div>
 	</div>
+
+
+	<!-- footer -->
+	<?php include "./assests/includes/footer.php" ?>
 </section>
 
 
 
 <script src="./assests/js/bootstrap.bundle.min.js"></script>
 <script src="./assests/js/script.js"></script>
+<script src="./assests/js/chart.min.js"></script>
 </body>
 
 </html>

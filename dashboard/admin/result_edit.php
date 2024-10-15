@@ -116,6 +116,20 @@ if ($_SESSION['usertype'] == 'student') {
                             <input type="text" class="form-control" id="grade" placeholder="Grade" value="<?php echo $result_data['grade'] ?>" name="grade" required>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-6 col-12 px-2">
+                        <div class="mb-3">
+                            <select class="form-control" name="session" id="session" required>
+                            <option value="<?php echo $result_data['session'] ?>" selected><?php echo $result_data['session'] ?></option>
+                                <?php
+                                $query = "SELECT * FROM `session` WHERE s_status='Active' ORDER BY id DESC";
+                                $run_query = mysqli_query($con, $query);
+                                while ($session = mysqli_fetch_assoc($run_query)) {
+                                ?>
+                                    <option value="<?php echo $session['s_name'] ?>"><?php echo $session['s_name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-between align-items-center">

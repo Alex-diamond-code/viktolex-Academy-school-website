@@ -93,7 +93,7 @@ if ($_SESSION['usertype'] == 'student') {
 		<!-- student record section -->
 		<div class="mt-4 table-responsive">
 			<h4 class="font-poppins fw-bold">List of Student</h4>
-			<table class="table table-striped table-bordered responsive table-hover" id="example">
+			<table class="table table-striped table-bordered dt-responsive nowrap w-100 table-hover" id="example">
 				<thead class="text-white bg-dark">
 					<tr>
 						<th scope="col" class="text-white bg-dark">Fullname</th>
@@ -101,7 +101,7 @@ if ($_SESSION['usertype'] == 'student') {
 						<th scope="col" class="text-white bg-dark">Phone</th>
 						<th scope="col" class="text-white bg-dark">Username</th>
 						<th scope="col" class="text-white bg-dark">Gender</th>
-						<th scope="col" class="text-white bg-dark">Password</th>
+						<th scope="col" class="text-white bg-dark">Status</th>
 						<th scope="col" class="text-white bg-dark">Action</th>
 					</tr>
 				</thead>
@@ -119,7 +119,7 @@ if ($_SESSION['usertype'] == 'student') {
 							<td><?php echo $row_data['phone'] ?></td>
 							<td><?php echo $row_data['username'] ?></td>
 							<td><?php echo $row_data['gender'] ?></td>
-							<td><?php echo $row_data['password'] ?></td>
+							<td><?php echo $row_data['status'] ?></td>
 							<td>
 								<div class="dropdown">
 									<button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -181,6 +181,7 @@ if ($_SESSION['usertype'] == 'student') {
 
 
 <script src="./assests/js/jquery.js"></script>
+<script src="./assests/js/responsive.bootstrap5.min.js"></script>
 <script src="./assests/js/bootstrap.bundle.min.js"></script>
 <script src="./assests/js/datatables.js"></script>
 <script src="./assests/js/script.js"></script>
@@ -197,7 +198,9 @@ if ($_SESSION['usertype'] == 'student') {
   		$('#example').DataTable({
     		//disable sorting on last column
     		"columnDefs": [
-    		  { "orderable": false, "targets": 5 }
+    		  { "orderable": false, 
+				"targets": 5 
+			}
     		],
     		language: {
     		  'paginate': {
